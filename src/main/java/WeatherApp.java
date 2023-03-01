@@ -15,7 +15,17 @@ public class WeatherApp {
         String city = input.nextLine();
         String finalData = getWeatherData(city);
        double result1 = getTemperature(finalData);
+       int result2 = getHumidity(finalData);
+       double result3 = getWindSpeed(finalData);
+       String result4 = getWindDirection(finalData);
        System.out.println(result1);
+       System.out.println(result2);
+       System.out.println(result3);
+        System.out.println(result4);
+
+
+
+
     }
 
     /**
@@ -46,15 +56,37 @@ public class WeatherApp {
     // TODO: Write getTemperature function returns celsius temperature of city by given json string
     public static double getTemperature(String weatherJson){
 
+        double answer = 0.0 ;
         JSONObject jobj= new JSONObject(weatherJson);
-        double answer = jobj;
+        answer = jobj.getJSONObject("current").getDouble("temp_c");
         return  answer;
     }
 
     // TODO: Write getHumidity function returns humidity percentage of city by given json string
     public static int getHumidity(String weatherJson){
-        int answer = 0;
-        return answer;
+
+        int answer = 0 ;
+        JSONObject jobj= new JSONObject(weatherJson);
+        answer = jobj.getJSONObject("current").getInt("humidity");
+        return  answer;
     }
+
+    public static double getWindSpeed(String weatherJson){
+
+        double answer = 0.0 ;
+        JSONObject jobj= new JSONObject(weatherJson);
+        answer = jobj.getJSONObject("current").getDouble("wind_kph");
+        return  answer;
+    }
+
+    public static String getWindDirection(String weatherJson){
+
+        String answer ;
+        JSONObject jobj= new JSONObject(weatherJson);
+        answer = jobj.getJSONObject("current").getString("wind_dir");
+        return  answer;
+    }
+
+
 }
 
